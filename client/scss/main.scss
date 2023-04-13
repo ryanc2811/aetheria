@@ -1,0 +1,658 @@
+//@import "style";
+@import "backbone.modal";
+@import "backbone.modal.theme";
+@import "effects";
+@import "base";
+
+
+$height: 600px;
+$game-height: 800px;
+
+.container {
+  min-width: 970px;
+  width: 970px important;
+  background: rgba(5,5,5,0.25);
+  padding: 20px;
+  margin-bottom: 150px;
+  //margin-top: 65px;
+}
+.board {
+  height: $game-height;
+  //border: 1px solid black;
+}
+
+.battleside {
+  width: 100%;
+  height: calc(#{$height} / 2);
+  //border: 1px solid black;
+}
+
+.large-field-counter {
+  line-height: 20px;
+  //border: 1px solid black;
+  border-radius: 30px;
+  height: 40px;
+  padding: 10px;
+  margin-top: 33px;
+  text-align: center;
+  font-size: 20px;
+  color: #8798ac;
+}
+
+.field {
+  //width: 100%;
+  height: 100px;
+  border-bottom: 1px solid black;
+
+  .card:first-child {
+    margin-left: 0 !important;
+  }
+
+  &.active {
+    //box-shadow: 0px 0px 15px #ffbb0b !important;
+    cursor: pointer;
+
+    -webkit-animation: WoobWoob linear 2s;
+    -webkit-animation-iteration-count: infinite;
+
+    -o-animation: WoobWoob linear 2s;
+    -o-animation-iteration-count: infinite;
+    
+    -ms-animation: WoobWoob linear 2s;
+    -ms-animation-iteration-count: infinite;
+
+    animation: WoobWoob linear 2s;
+    animation-iteration-count: infinite;
+
+    /*&:hover {
+      box-shadow: 0px 0px 30px #ffd135 !important;
+    }*/
+  }
+}
+
+@-webkit-keyframes WoobWoob {
+  0% {
+    box-shadow: 0 0 15px #ffbb0b;
+  }
+  50% {
+    box-shadow: 0 0 40px #ffd135;
+  }
+  100% {
+    box-shadow: 0 0 15px #ffbb0b;
+  }
+}
+
+@-o-keyframes WoobWoob {
+  0% {
+    box-shadow: 0 0 15px #ffbb0b;
+  }
+  50% {
+    box-shadow: 0 0 40px #ffd135;
+  }
+  100% {
+    box-shadow: 0 0 15px #ffbb0b;
+  }
+}
+@-ms-keyframes WoobWoob {
+  0% {
+    box-shadow: 0 0 15px #ffbb0b;
+  }
+  50% {
+    box-shadow: 0 0 40px #ffd135;
+  }
+  100% {
+    box-shadow: 0 0 15px #ffbb0b;
+  }
+}
+@keyframes WoobWoob {
+  0% {
+    box-shadow: 0 0 15px #ffbb0b;
+  }
+  50% {
+    box-shadow: 0 0 40px #ffd135;
+  }
+  100% {
+    box-shadow: 0 0 15px #ffbb0b;
+  }
+}
+
+.field-horn {
+  /*
+    border: 1px solid green;*/
+  /*clear: both;*/
+  margin: 0px;
+  padding: 0px;
+  background: url("../../assets/hunting-horn.png") no-repeat;
+  height: 100px;
+  //width: 64px;
+  background-position: 7px 20px;
+  //opacity: 0.4;
+}
+
+.field:hover, .field-single:hover {
+  //box-shadow: 0px 0px 10px #000;
+}
+
+.handcard-wrap {
+  margin: 0 auto;
+  width: 550px;
+}
+
+.field-hand {
+  //margin-top: 20px;
+  border: none;
+  transition: all .2s ease-in-out 0s;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(6, 13, 22, .8);
+  height: 110px;
+  z-index: 20;
+
+  .card {
+    margin-left: -31px;
+    &:first-child {
+      margin-left: 0 !important;
+    }
+    &:hover {
+      position: relative;
+      z-index: 10;
+      transform: scale(1.1, 1.1);
+    }
+  }
+}
+
+.passing {
+  color: #3f4c5b;
+  margin: 10px 0 0;
+  text-transform: uppercase;
+  /*
+    display: none;*/
+}
+
+.field-single {
+  //border: 1px solid black;
+  /*
+    width: 85px;*/
+  /*margin: 5px;*/
+  //height: 98px;
+  padding: 0;
+}
+
+.left-side {
+  //height: $game-height;
+}
+
+.field-deck-number {
+  display: block;
+  text-align: center;
+  font-size: 14px;
+  margin: 5px 0 0 0;
+  color: #3f4c5b;
+}
+
+.score,
+.hand-card {
+  color: #8798ac;
+  text-align: center;
+}
+
+.field-weather {
+  border: none;
+}
+
+.info-title {
+  color: #3f4c5b;
+}
+
+.info-name {
+  color: #8798ac;
+  font-size: 18px;
+  margin: 15px 0;
+}
+
+.button-pass-wrap {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  margin: 0 !important;
+}
+
+  .button-pass {
+    width: 100%;
+    border: 0;
+    background: #3f4c5b; 
+    padding: 5px 0;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 15px;
+    position: absolute;
+    z-index: 21;
+    margin-top: -33px;
+
+    &:hover {
+      background: lighten(#3f4c5b, 10%);
+    }
+
+    &:active {
+      background: #3f4c5b;
+    }
+  }
+
+.game-info {
+  height: calc((#{$game-height} / 2) - 140px);
+  width: 100%;
+  //border: 1px solid black;
+  //background: rgba(252, 219, 125, 0.1);
+  background: rgba(0,0,0, .4);
+  position: relative;
+
+  div {
+    margin-bottom: 5px;
+    padding: 0;
+    font-size: 17px;
+  }
+
+  .icon-hand-card {
+    background: url("../../assets/card_icon.png") no-repeat;
+    height: 50px;
+    width: 50px;
+    display: block;
+    position: absolute;
+    margin-top: -8px;
+  }
+}
+
+.removeBackground {
+  background: rgba(0,0,0, .4);
+}
+
+.mid-line {
+  width: 100%;
+  height: 1px;
+  //border: 1px solid black;
+  margin: 5px;
+}
+
+.right-side {
+  &:nth-child(2) {
+    border-bottom: 1px solid black;
+  }
+  height:calc(#{$height} / 2);
+}
+
+
+.card {
+  /*border: 2px solid black;
+  float: left;
+  margin: 3px;
+  overflow: hidden;*//*
+  height: 90px;
+  overflow: hidden;*//*
+  border: none !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  overflow: visible !important;
+  height: 93px !important;
+*/
+
+  i {/*
+    display: block;*/
+    //transform: scale(1);
+  }
+
+  /*.card-attr-power {
+    margin-top: 0px;
+    margin-left: 0px;
+    height: 25px;
+    width: 25px;
+    text-align: center;
+    line-height: 25px;
+    font-size: 20px;
+    color: black;
+  }*/
+  .card-attr-positive span {
+    color: #00b000 !important;
+  }
+
+  .card-attr-power {
+    position: absolute;
+    margin-top: -3px;
+    margin-left: -4px;
+    //margin-top: 2px;
+    cursor: default;
+    //padding-top: 3px;
+    //padding-left: -4px;
+    height: 30px;
+    width: 30px;
+    background: url("../../assets/card_strength_border.png") no-repeat;
+    z-index: 11;
+
+    span {
+      color: #ff2d00;
+      text-shadow: 1px 1px 1px #101010;
+      text-align: center;
+      font-weight: bold;
+      font-size: 16px;
+      width: 30px;
+      display: block;
+      margin-left: -2px;
+      margin-top: -1px;
+      line-height: 30px;
+    }
+  }
+
+  &.disabled {
+    opacity: 0.5;
+  }
+
+  /*&.activeCard {
+    position: relative;
+    z-index: 11;
+    transform: scale(1.5, 1.5) !important;
+  }*/
+}
+
+.field-discard,
+.field-deck {
+  background: rgba(0,0,0,.6);
+  float: left;
+  width: 65px;
+  height: 90px;
+  cursor: pointer;
+  margin: 20px 0;
+  transition: all .2s ease-in-out 0s;
+
+  &:hover {
+    background: rgba(0,0,0,.9);
+  }
+
+  i {
+    width: 35px;
+    height: 40px;
+    display: block;
+  }
+}
+
+.field-deck {
+  margin: 20px 0 0 10px;
+}
+
+.discard-skull {
+  background: url("../../assets/discard.png") no-repeat;
+  margin: 23px auto 0 auto;
+}
+
+.icon-deck {
+  background: url("../../assets/card_icon.png") no-repeat;
+  margin: 13px auto 0 auto;
+}
+
+.card-preview {
+  div {
+    position: fixed;
+    //left:0;
+    z-index: 310;
+    //height: 100px !important;
+    i {
+      display: block;
+      margin-left: -15px;
+    }
+    .preview-description {
+      width: 238px;
+      min-height: 200px;
+      background: rgba(16, 16, 16, 0.57);
+      color: #ffffff;
+      margin-left: -15px;
+
+      p {
+        padding: 10px;
+      }
+    }
+  }
+
+}
+
+.gwent-lives {
+  margin: 10px 0;
+
+  i {
+    display: block;
+    float: left;
+    height: 40px;
+    width: 40px;
+    margin: 0 10px 0 0;
+    background: url("../../assets/ruby-grey.png");
+    &.ruby {
+      background: url("../../assets/ruby.png");
+    }
+  }
+}
+
+.field {
+  &.field-frost {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+60,709bff+100&amp;0+60,1+100 */
+    background: -moz-linear-gradient(top,  rgba(255,255,255,0) 60%, rgba(112,155,255,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(60%,rgba(255,255,255,0)), color-stop(100%,rgba(112,155,255,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(255,255,255,0) 60%,rgba(112,155,255,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(255,255,255,0) 60%,rgba(112,155,255,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(255,255,255,0) 60%,rgba(112,155,255,1) 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  rgba(255,255,255,0) 60%,rgba(112,155,255,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#709bff',GradientType=0 ); /* IE6-9 */
+
+
+  }
+  &.field-fog {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+60,9b9b9b+100&amp;0+60,1+100 */
+    background: -moz-linear-gradient(top,  rgba(255,255,255,0) 60%, rgba(155,155,155,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(60%,rgba(255,255,255,0)), color-stop(100%,rgba(155,155,155,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(255,255,255,0) 60%,rgba(155,155,155,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(255,255,255,0) 60%,rgba(155,155,155,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(255,255,255,0) 60%,rgba(155,155,155,1) 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  rgba(255,255,255,0) 60%,rgba(155,155,155,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#9b9b9b',GradientType=0 ); /* IE6-9 */
+
+
+  }
+  &.field-rain {
+
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+60,133511+100&amp;0+60,1+100 */
+    background: -moz-linear-gradient(top,  rgba(255,255,255,0) 60%, rgba(19,53,17,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(60%,rgba(255,255,255,0)), color-stop(100%,rgba(19,53,17,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(255,255,255,0) 60%,rgba(19,53,17,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(255,255,255,0) 60%,rgba(19,53,17,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(255,255,255,0) 60%,rgba(19,53,17,1) 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  rgba(255,255,255,0) 60%,rgba(19,53,17,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#133511',GradientType=0 ); /* IE6-9 */
+
+
+
+  }
+}
+
+.playcard-banner {
+  position: fixed;
+  border: 1px solid red;
+  background: orangered;
+  width: 100%;
+  height: 250px;
+  left: 0;
+  text-align: center;
+  top: 200px;
+  z-index: 200;
+  .card {
+    position: relative;
+    left: 50%;
+    top: 30%;
+  }
+}
+
+.waiting-for-opponent {
+
+  // temp
+  //display: none;
+
+  position: fixed;
+  //left: 43%;
+  cursor: default;
+  width: 100%;
+  text-align: center;
+  //left: calc(50% - 400px) ;
+  left: 0;
+  //top: calc(50% - 60px);
+  top: calc(100% - 155px);
+  //top: 0;
+  //border: 1px solid black;
+  //border-radius: 10px;
+  /*
+  padding: 0px 200px;*/
+  font-size: 19px;
+  line-height: 15px;
+  padding: 15px;
+  z-index: 300;
+  color: #dfe1fd;
+  //text-shadow: 0px 0px 1px #000;
+  background: #444ba1;
+}
+
+.waiting-for-opponent,
+.notification-left {
+   animation: Woob linear 2s;
+   animation-iteration-count: infinite;
+   transform-origin: 50% 50%;
+   -webkit-animation: Woob linear 2s;
+   -webkit-animation-iteration-count: infinite;
+   -webkit-transform-origin: 50% 50%;
+   -moz-animation: Woob linear 2s;
+   -moz-animation-iteration-count: infinite;
+   -moz-transform-origin: 50% 50%;
+   -o-animation: Woob linear 2s;
+   -o-animation-iteration-count: infinite;
+   -o-transform-origin: 50% 50%;
+   -ms-animation: Woob linear 2s;
+   -ms-animation-iteration-count: infinite;
+   -ms-transform-origin: 50% 50%;
+ }
+
+.notification-left {
+  background: #c64b4b;
+  color: #fff;
+  left: 0;
+  padding: 10px 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 20;
+  text-align: center;
+  font-size: 17px;
+}
+
+.alert-success {
+  background: #3f4c5b;
+  color: #fff;
+  border-radius: 0;
+  border: 0;
+}
+
+.container {
+  position: relative;
+}
+
+.notifications {
+  position: fixed;
+  top: 0;
+  z-index: 200;
+  width: 500px;
+  left: calc(50% - (500px/2));
+}
+
+.notification {
+  height: 0;
+  /*margin-left: 250px;
+  margin-right: 250px;*/
+
+
+  .alert {
+    margin-bottom: 0;
+    display: none;
+    //padding: 0;
+  }
+}
+
+.startMatchmaking {
+  height: 50px;
+  line-height: 35px;
+  width: 200px;
+  text-align: left;
+}
+
+.image-gif-loader {
+  background: url("../../assets/content-load.gif");
+  display: block;
+  height: 32px;
+  width: 32px;
+  margin-left: 10px;
+
+}
+
+@keyframes Woob{
+  0% {
+    opacity:1;
+  }
+  50% {
+    opacity:0.8;
+  }
+  100% {
+    opacity:1;
+  }
+}
+
+@-moz-keyframes Woob{
+  0% {
+    opacity:1;
+  }
+  50% {
+    opacity:0.8;
+  }
+  100% {
+    opacity:1;
+  }
+}
+
+@-webkit-keyframes Woob {
+  0% {
+    opacity:1;
+  }
+  50% {
+    opacity:0.8;
+  }
+  100% {
+    opacity:1;
+  }
+}
+
+@-o-keyframes Woob {
+  0% {
+    opacity:1;
+  }
+  50% {
+    opacity:0.8;
+  }
+  100% {
+    opacity:1;
+  }
+}
+
+@-ms-keyframes Woob {
+  0% {
+    opacity:1;
+  }
+  50% {
+    opacity:0.8;
+  }
+  100% {
+    opacity:1;
+  }
+}

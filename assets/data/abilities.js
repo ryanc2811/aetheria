@@ -101,6 +101,73 @@ module.exports = {
         this.sendNotification(this.getName() + " activated Spy! Draws +2 cards.")
       }
     },
+    "backstab": {
+        name: "backstab",
+        description: "Backstab: Gains a power bonus when placed on the same row as an opposing creature that is adjacent to another friendly creature.",
+        onAfterPlace: function(card) {
+          var targetRow = card.getType();
+          var friendlyField = this.field[targetRow].get();
+          var enemyField = this.foe.field[targetRow].get();
+          var backstabActivated = false;
+  
+          friendlyField.forEach(function(friendlyCard, index) {
+            if (!backstabActivated && friendlyCard.getID() === card.getID()) {
+              if (enemyField[index - 1] && friendlyField[index - 1]) {
+                console.log("Backstab left!");
+                card.setBoost(enemyField[index - 1].getID(), 2);
+                backstabActivated = true;
+              }
+              if (enemyField[index + 1] && friendlyField[index + 1]) {
+                console.log("Backstab right!");
+                card.setBoost(enemyField[index + 1].getID(), 2);
+                backstabActivated = true;
+              }
+            }
+          });
+        }
+      },
+      "shadow_presence": {
+        name: "shadow_presence",
+        description: "Shadow Presence: Gains +1 strength for each card in the same row.",
+        onEachCardPlace: function(card) {
+            var self = this;
+            var targetRow = card.getType();
+            var friendlyField = this.field[targetRow].get();
+    
+            // Check if the card has the "shadow_presence" ability
+            if (card.hasAbility("shadow_presence")) {
+                var boostAmount = 0;
+    
+                // Iterate through the cards in the same row to count the number of cards
+                friendlyField.forEach(function(rowCard, index) {
+                    if (rowCard && rowCard !== card) {
+                        boostAmount += 1;
+                    }
+                });
+    
+                // Update the strength of the card with the "shadow_presence" ability
+                card.setBoost("shadow_presence", boostAmount);
+            }
+        }
+    },
+    "shadow_scavenger": {
+        name: "shadow_scavenger",
+        description: "Shadow Scavenger: Gains +1 strength for each card in both players' discard piles.",
+        onAfterPlace: function(card) {
+            var self = this;
+            var playerDiscardCount = this.getDiscard().length;
+            var opponentDiscardCount = this.foe.getDiscard().length;
+            var totalDiscardCount = playerDiscardCount + opponentDiscardCount;
+
+            console.log(totalDiscardCount);
+            // Check if the card has the "shadow_scavenger" ability
+            if (card.hasAbility("shadow_scavenger")) {
+                // Update the strength of the card with the "shadow_scavenger" ability
+                card.setBoost("shadow_scavenger", totalDiscardCount);
+            }
+        }
+    },
+    
     "weather_fog": {
       name: "weather_fog",
       description: "Sets the strength of all Ranged Combat cards to 1 for both players.",
@@ -350,6 +417,38 @@ module.exports = {
         }, true);
       }
     },
+    "veil_of_shadows": {
+        name: "Veil of Shadows",
+        description: "Boost all friendly Shadowveil units in play by 3 and reduce the power of all enemy non-Shadowveil units in play by 2.",
+        onActivate: function() {
+          var self = this;
+          var boostID = "veil_of_shadows"; // Unique string identifier for the boost effect
+      
+          // Apply a power boost to all friendly Shadowveil units in play
+          for (var i = 0; i < 3; i++) {
+            var row = self.field[i];
+            row.get().forEach(function(unit) {
+              if (unit.getProperty("faction") === "shadowveil") {
+                unit.setBoost(boostID, 3); // Boost power by 3
+              }
+            });
+          }
+      
+          // Get opponent's field
+          var opponentField = self.foe.field;
+      
+          // Apply a power reduction to all enemy non-Shadowveil units in play
+          for (var i = 0; i < 3; i++) {
+            var row = opponentField[i];
+            row.get().forEach(function(unit) {
+              if (unit.getProperty("faction") !== "shadowveil") {
+                unit.setBoost(boostID, -2); // Reduce power by 2
+              }
+            });
+          }
+        }
+      },
+      
     "hero": {
       name: "hero",
       description: "Hero: Not affected by special cards, weather cards or abilities."

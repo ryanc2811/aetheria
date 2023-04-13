@@ -311,8 +311,8 @@ module.exports = {
       type: 5
     },
   
-    "dandelion": {
-      name: "Dandelion",
+    "jaskier": {
+      name: "Jaskier",
       power: 2,
       ability: "commanders_horn",
       img: "dandelion",
@@ -1115,8 +1115,44 @@ module.exports = {
       img: "black_infantry_archer1",
       faction: "nilfgaardian",
       type: 1
-    }
+    },
   
+    "the_veiled_one": {
+        name: "Vel'rahn, the Veiled One",
+        power: -1,
+        ability: "veil_of_shadows",
+        img: "foltest_king",
+        faction: "shadowveil",
+        type: 3
+      },
+
+    "shadowveil_assassin":{
+        name: "Shadowveil Assassin",
+        power: 6,
+        ability: "backstab",
+        img: "fiend",
+        faction: "shadowveil",
+        type: 0
+      },
+    
+    "shadowveil_enclave_agent": {
+        name: "Shadowveil Enclave Agent",
+        power: 4,
+        ability: "shadow_presence",
+        img: "vanhemar",
+        faction: "shadowveil",
+        type: 1
+      }, 
+      
+      "shadowveil_scavenger": {
+        name: "Shadowveil Scavenger",
+        power: 3,
+        ability: "shadow_scavenger",
+        img: "impera_brigade_guard",
+        faction: "shadowveil",
+        type: 0
+    },
+    
   
   }
   

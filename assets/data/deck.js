@@ -25,12 +25,11 @@ module.exports = {
         "ballista",
         "trebuchet",
         "thaler",
-  
         "foltest_siegemaster",
   
         "vernon_roche",
         "john_natalis",
-        "dandelion",
+        "jaskier",
         "villentretenmerth",
   
         "biting_frost",
@@ -73,7 +72,7 @@ module.exports = {
         "young_emmisary",
         "young_emmisary",
         "avallach",
-        "dandelion",
+        "jaskier",
         "decoy",
         "decoy",
         "scorch",
@@ -146,7 +145,7 @@ module.exports = {
         "imlerith",
         "draug",
         "avallach",
-        "dandelion",
+        "jaskier",
   
         "decoy",
         "decoy",
@@ -190,5 +189,45 @@ module.exports = {
         "fiend",
         "earth_elemental"
       ]
-    }
+    },
+
+    "shadowveil": {
+        faction: "shadowveil",
+        data: [
+            //The Leader
+            "the_veiled_one",
+
+            //----Special shadowveil----//
+
+            //Close combat
+          "shadowveil_assassin",
+          "shadowveil_assassin",
+          "shadowveil_assassin",
+          "shadowveil_scavenger",
+          //Ranged
+          "shadowveil_enclave_agent",
+          "shadowveil_enclave_agent",
+          "shadowveil_enclave_agent",
+          "shadowveil_enclave_agent",
+          //Siege
+
+          //----Neutral----//
+
+          //Close combat
+          "avallach",
+          "jaskier",
+
+          //Spells
+          "biting_frost",
+            "impenetrable_fog",
+            "clear_weather",
+            "clear_weather",
+            "commanders_horn",
+            "commanders_horn",
+            "decoy",
+            "decoy",
+            "scorch",
+            "scorch"
+        ]
+      }
   }

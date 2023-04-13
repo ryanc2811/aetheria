@@ -1,0 +1,32 @@
+<section class="deck-builder">
+  <h2>Deck Builder</h2>
+
+  <div class="deck-info">
+    <h3>Custom Deck</h3>
+    <p>Faction: <span class="selected-faction">Northern Realms</span></p>
+    <p>Cards in deck: <span class="cards-count">0</span></p>
+  </div>
+
+  <div class="available-cards">
+    <h3>Available Cards</h3>
+    <div class="card-pool">
+      {{#each availableCards}}
+        {{> card this}}
+      {{/each}}
+    </div>
+  </div>
+
+  <div class="custom-deck">
+    <h3>Custom Deck</h3>
+    <div class="selected-cards">
+      {{#each customDeck}}
+        {{> card this}}
+      {{/each}}
+    </div>
+  </div>
+
+  <div class="deck-builder-actions">
+    <button class="btn-save-deck">Save Deck</button>
+    <button class="btn-cancel-deck">Cancel</button>
+  </div>
+</section>
