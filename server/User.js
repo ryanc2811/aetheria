@@ -1,3 +1,4 @@
+const DeckBuilder = require("./DeckBuilder");
 var User = (function(){
     var User = function(socket){
       if(!(this instanceof User)){

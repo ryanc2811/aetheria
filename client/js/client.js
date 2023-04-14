@@ -939,12 +939,14 @@ let Lobby = Backbone.View.extend({
   openDeckBuilder: function() {
     console.log("Opening deck builder...");
     const deckBuilderView = new DeckBuilder({
-        app: app
+        app: this.app // use "this.app" instead of "App"
     });
-  console.log("DeckBuilder view created:", deckBuilderView);
+    console.log("DeckBuilder view created:", deckBuilderView);
     deckBuilderView.render();
-    // Append the deckBuilderView to a DOM element or replace existing content
+    // Append the deckBuilderView to the .gwent-battle element, replacing the existing content
+    $(".gwent-battle").html(deckBuilderView.el);
   }
+  
 });
 
 let Preview = Backbone.View.extend({

@@ -3,6 +3,7 @@ var Card = require("./Card");
 var DeckData = require("../assets/data/deck");
 var _ = require("underscore");
 
+
 var Deck = (function(){
   var Deck = function(deck, side){
     if(!(this instanceof Deck)){
@@ -12,7 +13,7 @@ var Deck = (function(){
      * constructor here
      */
 
-    this.side = side;
+    this.side=side;
     this._deck = [];
 
     //if(typeof deck !== "object") throw new Error("Deck is not an object!");
